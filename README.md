@@ -27,4 +27,4 @@ If everything goes well, you will be able to access all the created machines for
 
 Script:
 
-use : Python script.py to load the scrips that will start sending requests to the Flask App, this will generate metrics, Prometheus will scape it and it will be shown in the included Grafana Dashboard.
+use : Python script.py to start sending requests to the Flask App, this will generate metrics, Prometheus will scape it and it will be shown in the included Grafana Dashboard.
