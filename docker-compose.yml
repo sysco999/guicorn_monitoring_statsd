@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+# I created 3 apps for monitoring on ports : 8000 - 8001 - 8002
+  first-app:
+    build: ./app
+    ports:
+      - "8000:8000"
+    environment:
+      APP_NAME: "first_app"
+
+  second-app:
+    build: ./app
+    ports:
+      - "8001:8000"
+    environment:
+      - APP_NAME=second_app
+
+  third-app:
+    build: ./app
+    ports:
+      - "8002:8000"
+    environment:
+      - APP_NAME=third_app
+
+
+  statsd-exporter:
+    image: prom/statsd-exporter:v0.22.4
+    command: [ "--statsd.mapping-config=/statsd/statsd.conf" ]
+    volumes:
+      - ./statsd-exporter/statsd.conf:/statsd/statsd.conf
+    ports:
+      - "9125:9125"
+      - "9102:9102"
+
+  prometheus:
+    image: prom/prometheus:latest
+    command: [ "--config.file=/workspace/prometheus.yml" ]
+    volumes:
+      - ./prometheus:/workspace
+    ports:
+      - 9090:9090
+
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
