@@ -35,7 +35,7 @@ services:
 
   prometheus:
     image: prom/prometheus:latest
-    command: [ "--config.file=/prometheus.yml" ]
+    command: [ "--config.file=/workspace/prometheus.yml" ]
     volumes:
       - ./prometheus:/workspace
     ports:
@@ -45,3 +45,5 @@ services:
     image: grafana/grafana:latest
     volumes:
       - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    ports:
+      - 3000:3000
