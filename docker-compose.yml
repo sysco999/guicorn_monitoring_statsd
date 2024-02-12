@@ -14,14 +14,14 @@ services:
     ports:
       - "8001:8000"
     environment:
-      - APP_NAME=second_app
+      APP_NAME : "second_app"
 
   third-app:
     build: ./app
     ports:
       - "8002:8000"
     environment:
-      - APP_NAME=third_app
+      APP_NAME: "third_app"
 
 
   statsd-exporter:
